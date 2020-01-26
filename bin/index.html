@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SameGameTS</title>
+        <!-- <link rel="stylesheet" type="text/css" href="ext/bootstrap/css/bootstrap.min.css" /> -->
+
+        <style>
+            html, body {
+                margin: 0;
+                height: 100%;
+            }
+        </style>
+
+        <!-- <script src="ext/bootstrap/js/bootstrap.min.js"></script> -->
+    </head>
+    <body>
+        <canvas id="canvas" width="1024" height="768"></canvas>
+        <div style="display: none;">
+            <img id="blockImage" src="assets/Block.png" width="160" height="32" />
+        </div>
+        <script src="app.js"></script>
+        <script>
+            var path = './';
+            var fs = require('fs');
+            
+            var reloadWatcher=fs.watch(path, function() {
+                location.reload();
+                reloadWatcher.close();
+            });
+        </script>
+    </body>
+</html>

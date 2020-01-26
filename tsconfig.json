@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "jsx": "react",    
+    "jsxFactory": "html",
+    "sourceMap": true,
+    "outFile": "./bin/app.js",
+    "strict": true,       
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "files": [
+    "src/bootstrapper.ts",
+    "src/main.ts"
+  ]
+}

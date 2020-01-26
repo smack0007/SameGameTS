@@ -1,0 +1,16 @@
+{
+  "name": "SameGameTS",
+  "main": "index.html",
+  "description": "",
+  "version": "0.1.0",
+  "keywords": [  ],
+  "window": {
+    "title": "SameGameTS",
+    "icon": "",
+    "toolbar": false,
+    "frame": true,
+    "width": 1024,
+    "height": 768,
+    "position": "mouse"
+  }
+}

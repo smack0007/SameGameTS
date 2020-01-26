@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+
+ext/nwjs/
+
+app.js
+app.js.map
