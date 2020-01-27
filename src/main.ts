@@ -8,7 +8,7 @@ enum BlockColors {
   blue,
   green,
   yellow
-};
+}
 
 function init() {
   graphics.fillRect(0, 0, canvas.width, canvas.height);

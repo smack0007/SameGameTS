@@ -7,7 +7,7 @@
     "outFile": "./bin/app.js",
     "strict": true,       
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
   },
   "files": [
     "src/bootstrapper.ts",
