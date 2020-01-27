@@ -1,4 +1,4 @@
 @ECHO OFF
 PUSHD %~dp0
-nw bin
+CALL nw bin
 POPD

@@ -1,2 +1,2 @@
-npm i -g typescript
-npm i -g tslint
+CALL npm i -g typescript
+CALL npm i -g tslint

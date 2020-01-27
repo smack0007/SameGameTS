@@ -1,4 +1,4 @@
-npm i -g typescript
-npm i -g tslint
-npm i -g nw
-npm i -g http-server
+CALL npm i -g typescript
+CALL npm i -g tslint
+CALL npm i -g nw
+CALL npm i -g http-server

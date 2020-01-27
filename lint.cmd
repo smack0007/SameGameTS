@@ -1,4 +1,4 @@
 @ECHO OFF
 PUSHD %~dp0
-tslint --project .
+CALL tslint --project .
 POPD

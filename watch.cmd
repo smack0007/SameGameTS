@@ -1,4 +1,4 @@
 @ECHO OFF
 PUSHD %~dp0
-tsc --watch
+CALL tsc --watch
 POPD

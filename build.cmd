@@ -1,5 +1,5 @@
 @ECHO OFF
 PUSHD %~dp0
-lint
+CALL lint
 tsc
 POPD
