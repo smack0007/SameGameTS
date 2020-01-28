@@ -1,4 +1,5 @@
 @ECHO OFF
 PUSHD %~dp0
-CALL tslint --project .
+ECHO Linting...
+CALL .\node_modules\.bin\tslint.cmd --project .
 POPD

@@ -1,5 +1,7 @@
 @ECHO OFF
 PUSHD %~dp0
 CALL lint
-tsc
+
+ECHO Building...
+CALL .\node_modules\.bin\tsc.cmd
 POPD

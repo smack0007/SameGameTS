@@ -9,9 +9,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Setup
+    - name: Restore
       shell: cmd
-      run: setup-ci
+      run: restore
     - name: Build
       shell: cmd
       run: build
