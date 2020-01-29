@@ -4,6 +4,7 @@
     "jsx": "react",    
     "jsxFactory": "html",
     "sourceMap": true,
+    "module": "amd",
     "outFile": "./bin/app.js",
     "strict": true,       
     "esModuleInterop": true,
