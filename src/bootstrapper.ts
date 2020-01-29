@@ -2,10 +2,8 @@ type factoryFunc = (require: Function, exports: any) => void;
 
 const modules: { [key: string]: any } = {};
 
-function require() {
-}
-
 function define(id: string, dependencies: string[], factory: factoryFunc) {   
+    const require = () => {};
     const exports = {};
     const factoryArgs: [Function, any] = [ require, exports ];
 
