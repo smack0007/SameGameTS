@@ -7,10 +7,13 @@
     <body>
         <canvas id="canvas" width="1024" height="768"></canvas>
         <div style="display: none;">
-            <img id="blockImage" src="assets/Block.png" width="160" height="32" />
+            <img id="blockImage" src="assets/block.png" width="160" height="32" />
         </div>
         <script src="app.js"></script>
         <script>
+            var win = nw.Window.get();
+            win.showDevTools();
+            
             var path = './';
             var fs = require('fs');
             

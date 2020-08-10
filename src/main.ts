@@ -2,6 +2,8 @@ import { Board } from './Game/Board';
 import { BlockColors } from './Game/BlockColors';
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
+canvas.addEventListener('mousedown', onCanvasMouseDown);
+
 const graphics = canvas.getContext("2d") as CanvasRenderingContext2D;
 
 const blockImage: HTMLImageElement = document.getElementById("blockImage") as HTMLImageElement;
@@ -48,6 +50,10 @@ function init() {
       graphics.putImageData(imageData, xOffset, yOffset);
     }
   }
+}
+
+function onCanvasMouseDown(event: MouseEvent) {
+  console.info(event);
 }
 
 init();
