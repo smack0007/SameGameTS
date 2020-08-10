@@ -6,7 +6,7 @@ outputEnvironmentVariables();
 chdir(respositoryRootDirectory);
 
 async function compile(): Promise<void> {
-    const { stdout, stderr } = await exec('compile.cmd');
+    const { stdout, stderr } = await exec('tsc');
     console.log(stdout);
     console.error(stderr);
 }

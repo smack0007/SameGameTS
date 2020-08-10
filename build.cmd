@@ -1,9 +1,8 @@
 @ECHO OFF
 PUSHD %~dp0
-CALL lint
 
 ECHO Building...
-CALL .\node_modules\.bin\ts-node.cmd --project .\scripts\tsconfig.json .\scripts\build.ts
+CALL tsc .\scripts\build.ts && CALL node .\scripts\build.js
 
 ECHO Done.
 POPD
