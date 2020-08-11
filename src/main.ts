@@ -1,5 +1,6 @@
 import { Board } from './Game/Board';
 import { BlockColors } from './Game/BlockColors';
+import { Block } from './Game/Block';
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
 canvas.addEventListener('mousedown', onCanvasMouseDown);
@@ -11,50 +12,78 @@ const blockImage: HTMLImageElement = document.getElementById("blockImage") as HT
 const board = new Board();
 
 function init() {
-  graphics.fillRect(0, 0, canvas.width, canvas.height);
-  
-  for (let y = 0; y < Board.Height; y++) {
-    for (let x = 0; x < Board.Width; x++) {      
-      const block = board.getBlock(x, y);
-      const xOffset = x * 32;
-      const yOffset = y * 32;
+    draw();
+    setInterval(draw, 1000 / 60);
+}
 
-      graphics.drawImage(blockImage, 0, 0, 32, 32, xOffset, yOffset, 32, 32);
+function draw() {    
+    graphics.fillRect(0, 0, canvas.width, canvas.height);
 
-      const imageData = graphics.getImageData(xOffset, yOffset, 32, 32);
+    for (let y = 0; y < Board.Height; y++) {
+        for (let x = 0; x < Board.Width; x++) {
+            const block = board.getBlock(x, y);
+            const xOffset = x * Block.WidthInPixels;
+            const yOffset = y * Block.HeightInPixels;
 
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        switch (block.Color) {
-          case BlockColors.Red:
-            imageData.data[i + 1] = 0;
-            imageData.data[i + 2] = 0;
-            break;
+            graphics.drawImage(
+                blockImage,
+                0,
+                0,
+                Block.WidthInPixels,
+                Block.HeightInPixels,
+                xOffset,
+                yOffset,
+                Block.WidthInPixels,
+                Block.HeightInPixels);
 
-          case BlockColors.Blue:
-            imageData.data[i + 0] = 0;
-            imageData.data[i + 2] = 0;
-            break;
+            const imageData = graphics.getImageData(xOffset, yOffset, Block.WidthInPixels, Block.HeightInPixels);
 
-          case BlockColors.Green:
-            imageData.data[i + 0] = 0;
-            imageData.data[i + 1] = 0;
-            break;
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                switch (block.Color) {
+                    case BlockColors.Red:
+                        imageData.data[i + 1] = 0;
+                        imageData.data[i + 2] = 0;
+                        break;
 
-          case BlockColors.Yellow:
-            imageData.data[i + 2] = 0;
-            break;
+                    case BlockColors.Blue:
+                        imageData.data[i + 0] = 0;
+                        imageData.data[i + 2] = 0;
+                        break;
+
+                    case BlockColors.Green:
+                        imageData.data[i + 0] = 0;
+                        imageData.data[i + 1] = 0;
+                        break;
+
+                    case BlockColors.Yellow:
+                        imageData.data[i + 2] = 0;
+                        break;
+                }
+            }
+
+            graphics.putImageData(imageData, xOffset, yOffset);
+
+            if (block.IsSelected) {                
+                graphics.drawImage(
+                    blockImage,
+                    Block.WidthInPixels * 4,
+                    0,
+                    Block.WidthInPixels,
+                    Block.HeightInPixels,
+                    xOffset,
+                    yOffset,
+                    Block.WidthInPixels,
+                    Block.HeightInPixels);
+            }
         }
-        
-      }
-
-      graphics.putImageData(imageData, xOffset, yOffset);
     }
-  }
 }
 
 function onCanvasMouseDown(event: MouseEvent) {
-  console.info(event);
+    if (event.x > 0 && event.x < Board.WidthInPixels &&
+        event.y > 0 && event.y < Board.HeightInPixels) {
+        board.onClick(event.x, event.y);
+    }
 }
 
 init();
- 

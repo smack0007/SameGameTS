@@ -17,7 +17,8 @@
             var path = './';
             var fs = require('fs');
             
-            var reloadWatcher=fs.watch(path, function() {
+            var reloadWatcher = fs.watch(path, function() {
+                console.info('Reloading...');
                 location.reload();
                 reloadWatcher.close();
             });
