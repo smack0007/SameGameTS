@@ -1,6 +1,6 @@
 import { chdir } from 'process';
 import { outputEnvironmentVariables, respositoryRootDirectory } from './environment';
-import { copyFile, exec, copyDir } from './util';
+import { copyFile, exec, copyDir } from './utils/fs';
 
 outputEnvironmentVariables();
 chdir(respositoryRootDirectory);

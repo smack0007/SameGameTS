@@ -3,6 +3,6 @@
         "**/bin": true,
         "**/ext": true,
         "**/node_modules": true,
-        "**/scripts/*.js": true,
+        "**/scripts/**/*.js": true,
     }
 }
