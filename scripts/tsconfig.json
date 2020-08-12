@@ -1,6 +1,0 @@
-{
-  "extends": "../tsconfig.common.json",
-  "compilerOptions": {
-    "typeRoots" : [ "../ext/@types" ]
-  }
-}

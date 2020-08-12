@@ -5,12 +5,6 @@ import { copyFile, exec, copyDir } from './utils/fs';
 outputEnvironmentVariables();
 chdir(respositoryRootDirectory);
 
-async function compile(): Promise<void> {
-    const { stdout, stderr } = await exec('tsc');
-    console.log(stdout);
-    console.error(stderr);
-}
-
 async function copyFiles(): Promise<void> {
     await copyFile('src/index.html', 'bin/index.html');
     await copyFile('src/nwjs.package.json', 'bin/package.json');
@@ -19,7 +13,6 @@ async function copyFiles(): Promise<void> {
 }
 
 async function build() {
-    await compile();
     await copyFiles();
 }
 

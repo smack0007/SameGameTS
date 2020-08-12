@@ -2,7 +2,9 @@
 PUSHD %~dp0
 
 ECHO Building...
-CALL tsc --project .\scripts\tsconfig.json && CALL node .\scripts\build.js
+CALL tsc --strict --typeRoots ext\@types -t es2015 -m commonjs --inlineSourceMap --inlineSources src\main.ts
+CALL browserify --debug src\main.js -o bin\app.js
 
-ECHO Done.
+CALL tsc --strict --typeRoots ext\@types scripts\build.ts && CALL node scripts\build.js
+
 POPD

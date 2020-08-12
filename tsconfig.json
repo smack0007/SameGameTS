@@ -1,16 +1,7 @@
 {
-  "extends": "./tsconfig.common.json",
   "compilerOptions": {
-    "target": "es2015",
-    "jsx": "react",    
-    "jsxFactory": "html",
-    "sourceMap": true,
-    "module": "amd",
-    "outFile": "./bin/app.js",
-    "esModuleInterop": false,
-  },
-  "files": [
-    "src/bootstrapper.ts",
-    "src/main.ts"
-  ]
+    "target": "ES2015",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
 }

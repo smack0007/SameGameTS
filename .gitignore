@@ -1,4 +1,4 @@
 bin/
 ext/nw/**
 node_modules/
-scripts/**/*.js
+**/*.js
