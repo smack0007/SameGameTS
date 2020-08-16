@@ -26,7 +26,6 @@ export class Board {
         const blockX = Math.floor(x / Block.WidthInPixels);
         const blockY = Math.floor(y / Block.HeightInPixels);
         const block = this.getBlock(blockX, blockY);
-        console.info(blockX, blockY, block);
         block.select();
     }
 }
