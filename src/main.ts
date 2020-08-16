@@ -64,6 +64,8 @@ function draw() {
             graphics.putImageData(imageData, xOffset, yOffset);
 
             if (block.IsSelected) {                
+                graphics.globalAlpha = 0.7;
+
                 graphics.drawImage(
                     blockImage,
                     Block.WidthInPixels * 4,
@@ -74,6 +76,8 @@ function draw() {
                     yOffset,
                     Block.WidthInPixels,
                     Block.HeightInPixels);
+
+                    graphics.globalAlpha = 1.0;
             }
         }
     }
