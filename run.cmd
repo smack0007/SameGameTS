@@ -1,5 +1,5 @@
 @ECHO OFF
 PUSHD %~dp0
 ECHO Running...
-.\ext\nw\sdk\nw bin
+.\ext\nwjs\sdk\nw bin
 POPD

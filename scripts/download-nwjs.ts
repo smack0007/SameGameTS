@@ -1,8 +1,13 @@
-import { httpGet } from "./utils/http";
+import { respositoryRootDirectory } from './environment';
+import { httpGet, httpDownload } from "./utils/http";
 
 const versionRegex = new RegExp('href\\=\\"v([^/]+)/\\"', "g");
 
-httpGet("https://dl.nwjs.io").then(html => {
+const baseUrl = "https://dl.nwjs.io";
+
+const nwjsPath = `${respositoryRootDirectory}/ext/nwjs/`;
+
+httpGet(baseUrl).then(html => {
     const versions: string[] = [];
     
     let result;
@@ -14,6 +19,14 @@ httpGet("https://dl.nwjs.io").then(html => {
 
     return versions;
 }).then(versions => {
-    console.info('Newest version: ' + versions[versions.length - 1]);
+    const newestVersion = versions[versions.length - 1];
+    console.info('Newest version: ' + newestVersion);
+
+    const zipUrl = `${baseUrl}/v${newestVersion}/nwjs-sdk-v${newestVersion}-win-x64.zip`;
+    const destPath = `${nwjsPath}/sdk/nwjs.zip`;
+    console.info(`${zipUrl} => ${destPath}`);    
+    return httpDownload(zipUrl, destPath);
+}).then(x => {
+    console.info("Download finished.");
 });
 
