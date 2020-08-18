@@ -1,5 +1,7 @@
 import { respositoryRootDirectory } from './environment';
 import { httpGet, httpDownload } from "./utils/http";
+import * as fs from "fs";
+import * as unzip from "unzip";
 
 const versionRegex = new RegExp('href\\=\\"v([^/]+)/\\"', "g");
 
@@ -28,4 +30,6 @@ httpGet(baseUrl).then(html => {
     return httpDownload(zipUrl, destPath);
 }).then(x => {
     console.info("Download finished.");
+
+    fs.createReadStream(x.path).pipe(unzip.Extract({ path: `${nwjsPath}/sdk/` }));
 });
