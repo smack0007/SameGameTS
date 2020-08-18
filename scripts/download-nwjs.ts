@@ -29,4 +29,3 @@ httpGet(baseUrl).then(html => {
 }).then(x => {
     console.info("Download finished.");
 });
-

@@ -1,0 +1,36 @@
+{
+  "name": "samegamets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "bin": {
+    "samegamets": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smack0007/SameGameTS.git"
+  },
+  "keywords": [
+    "nwjs",
+    "game"
+  ],
+  "author": "smack0007",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smack0007/SameGameTS/issues"
+  },
+  "homepage": "https://github.com/smack0007/SameGameTS#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^14.6.0",
+    "browserify": "^16.5.2",
+    "typescript": "^3.9.7"
+  },
+  "scripts": {
+    "build": "npm run build:tsc && npm run build:browserify && npm run build:pack",
+    "build:tsc": "tsc --strict --typeRoots ext/@types -t es2015 -m commonjs --inlineSourceMap --inlineSources src/main.ts",
+    "build:browserify": "browserify --debug src/main.js -o bin/app.js",
+    "build:pack": "tsc --strict --typeRoots ext/@types scripts/build.ts && node scripts/build.js",
+    "test": "echo 'Test'"
+  }
+}
