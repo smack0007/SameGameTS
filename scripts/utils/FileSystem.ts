@@ -51,7 +51,7 @@ export class FileSystem {
 
 	public static deleteDirectory(path: string, recursive: boolean = false): Promise<void> {
 		return new Promise<void>((resolve, reject) => {
-			rmdir(path, { recursive }, (err) => {
+			rmdir(path, { recursive: recursive }, (err) => {
 				if (err) {
 					reject(err);
 					return;

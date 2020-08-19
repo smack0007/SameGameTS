@@ -2,7 +2,6 @@ import { respositoryRootDirectory } from './environment';
 import { Http } from "./utils/Http";
 import { FileSystem } from './utils/FileSystem';
 import * as extractZip from "extract-zip";
-import { version } from 'os';
 
 const versionRegex = new RegExp('href\\=\\"v([^/]+)/\\"', "g");
 
@@ -16,10 +15,16 @@ const platforms = [
 
 console.info("Deleting current versions...");
 Promise.all(platforms.map(platform => 
-    FileSystem.exists(`${nwjsPath}/${platform}`).then(exists => {
-        if (exists) {
-            FileSystem.deleteDirectory(`${nwjsPath}/${platform}`, true);
-        }
+    new Promise((resolve) => {
+        FileSystem.exists(`${nwjsPath}/${platform}`).then(exists => {
+            if (exists) {
+                FileSystem.deleteDirectory(`${nwjsPath}/${platform}`, true).then(() => {
+                    resolve();
+                });
+            } else {
+                resolve();
+            }
+        });
     })
 )).then(() => {
     console.info("Creating platform directories...");
@@ -49,21 +54,23 @@ Promise.all(platforms.map(platform =>
     return Promise.all(platforms.map(platform => {
         const zipUrl = `${baseUrl}/v${newestVersion}/nwjs-sdk-v${newestVersion}-${platform}.zip`;
         const destPath = `${nwjsPath}/${platform}/nwjs-sdk.zip`;
-        console.info(`${zipUrl} => ${destPath}`);   
-        return Http.download(zipUrl, destPath).then(x => {
-            return {
-                version: newestVersion,
-                platform: platform,
-                zipPath: destPath
-            };
+        console.info(`${zipUrl} => ${destPath}`);
+        return new Promise<{ version: string, platform: string, zipPath: string}>((resolve) => {
+            Http.download(zipUrl, destPath).then(x => {
+                resolve({
+                    version: newestVersion,
+                    platform: platform,
+                    zipPath: destPath
+                });
+            });
         });
     }));
 }).then(x => {
     console.info("Download finished. Unzipping...");
 
-    return Promise.all(x.map(y => {
-        return extractZip(y.zipPath, { dir: `${nwjsPath}/${y.platform}` }).then(() => y);
-    }));
+    return Promise.all(x.map(y => new Promise<{ version: string, platform: string, zipPath: string}>((resolve) => 
+        extractZip(y.zipPath, { dir: `${nwjsPath}/${y.platform}` }).then(() => resolve(y))
+    )));
 }).then(x => {
     console.info("Renaming zip output directories and removing zips...");
     
