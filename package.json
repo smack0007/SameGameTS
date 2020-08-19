@@ -30,10 +30,10 @@
   },
   "scripts": {
     "build": "npm run build:tsc && npm run build:browserify && npm run build:pack",
-    "build:tsc": "tsc --strict --typeRoots ext/@types -t es2015 -m commonjs --inlineSourceMap --inlineSources src/main.ts",
+    "build:tsc": "tsc --strict --typeRoots node_modules/@types -t es2015 -m commonjs --inlineSourceMap --inlineSources src/main.ts",
     "build:browserify": "browserify --debug src/main.js -o bin/app.js",
-    "build:pack": "tsc --strict --typeRoots ext/@types scripts/build.ts && node scripts/build.js",
-    "download:nwjs": "tsc --strict --typeRoots ext/@types scripts/download-nwjs.ts && node scripts/download-nwjs.js",
+    "build:pack": "tsc --strict --typeRoots node_modules/@types scripts/build.ts && node scripts/build.js",
+    "download:nwjs": "tsc --strict --typeRoots node_modules/@types scripts/download-nwjs.ts && node scripts/download-nwjs.js",
     "test": "echo 'Test'"
   }
 }
