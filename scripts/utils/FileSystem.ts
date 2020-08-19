@@ -28,11 +28,23 @@ export class FileSystem {
 		}
 	}
 
-	public static createDirectory(dir: string): Promise<void> {
-		return mkdirPromise(dir, 755).catch((error) => {
+	public static createDirectory(path: string): Promise<void> {
+		return mkdirPromise(path, 755).catch((error) => {
 			if (error.code !== 'EEXIST') {
 				throw error;
 			}
+		});
+	}
+
+	public static createDirectoryIfNotExists(path: string): Promise<void> {
+		return new Promise((resolve) => {
+			FileSystem.exists(path).then(exists => {
+				if (!exists) {
+					FileSystem.createDirectory(path).then(() => resolve());
+				} else {
+					resolve();
+				}
+			});
 		});
 	}
 
@@ -58,6 +70,18 @@ export class FileSystem {
 				}
 
 				resolve();
+			});
+		});
+	}
+
+	public static deleteDirectoryIfExists(path: string, recursive: boolean = false): Promise<void> {
+		return new Promise((resolve) => {
+			FileSystem.exists(path).then(exists => {
+				if (exists) {
+					FileSystem.deleteDirectory(path, recursive).then(() => resolve());
+				} else {
+					resolve();
+				}
 			});
 		});
 	}

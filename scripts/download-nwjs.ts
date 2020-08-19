@@ -13,20 +13,14 @@ const platforms = [
     'win-x64'
 ];
 
-console.info("Deleting current versions...");
-Promise.all(platforms.map(platform => 
-    new Promise((resolve) => {
-        FileSystem.exists(`${nwjsPath}/${platform}`).then(exists => {
-            if (exists) {
-                FileSystem.deleteDirectory(`${nwjsPath}/${platform}`, true).then(() => {
-                    resolve();
-                });
-            } else {
-                resolve();
-            }
-        });
-    })
-)).then(() => {
+console.info("Ensuring nwjs directory...");
+FileSystem.createDirectoryIfNotExists(nwjsPath)
+.then(() => {
+    console.info("Deleting current versions...");
+    return Promise.all(platforms.map(platform => 
+        FileSystem.deleteDirectoryIfExists(`${nwjsPath}/${platform}`, true)
+    ));
+}).then(() => {
     console.info("Creating platform directories...");
     return Promise.all(
         platforms.map(platform => {
