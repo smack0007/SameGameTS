@@ -1,5 +1,0 @@
-@ECHO OFF
-PUSHD %~dp0
-ECHO Testing...
-
-POPD

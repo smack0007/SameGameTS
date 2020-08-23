@@ -1,1 +1,0 @@
-SET __TSC_FLAGS=--strict --typeRoots ext\@types -t es2015 -m commonjs --inlineSourceMap --inlineSources

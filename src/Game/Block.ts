@@ -4,11 +4,11 @@ export class Block {
     public static readonly WidthInPixels = 32;
     public static readonly HeightInPixels = 32;
     
-    public get Color(): BlockColors {
+    public get color(): BlockColors {
         return this._color;
     }
 
-    public get IsSelected(): boolean {
+    public get isSelected(): boolean {
         return this._isSelected;
     }
     

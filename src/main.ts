@@ -39,23 +39,23 @@ function draw() {
             const imageData = graphics.getImageData(xOffset, yOffset, Block.WidthInPixels, Block.HeightInPixels);
 
             for (let i = 0; i < imageData.data.length; i += 4) {
-                switch (block.Color) {
-                    case BlockColors.Red:
+                switch (block.color) {
+                    case BlockColors.red:
                         imageData.data[i + 1] = 0;
                         imageData.data[i + 2] = 0;
                         break;
 
-                    case BlockColors.Blue:
+                    case BlockColors.blue:
                         imageData.data[i + 0] = 0;
                         imageData.data[i + 2] = 0;
                         break;
 
-                    case BlockColors.Green:
+                    case BlockColors.green:
                         imageData.data[i + 0] = 0;
                         imageData.data[i + 1] = 0;
                         break;
 
-                    case BlockColors.Yellow:
+                    case BlockColors.yellow:
                         imageData.data[i + 2] = 0;
                         break;
                 }
@@ -63,7 +63,7 @@ function draw() {
 
             graphics.putImageData(imageData, xOffset, yOffset);
 
-            if (block.IsSelected) {                
+            if (block.isSelected) {                
                 graphics.globalAlpha = 0.7;
 
                 graphics.drawImage(

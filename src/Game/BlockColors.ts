@@ -1,6 +1,6 @@
 export enum BlockColors {
-    Red = 0,
-    Blue,
-    Green,
-    Yellow
+    red = 0,
+    blue,
+    green,
+    yellow
 }
