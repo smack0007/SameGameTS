@@ -36,7 +36,7 @@
     "build-tsc": "tsc --strict --typeRoots node_modules/@types -t es2015 -m commonjs --inlineSourceMap --inlineSources src/main.ts",
     "build-browserify": "browserify --debug src/main.js -o bin/app.js",
     "build-pack": "tsc --strict --typeRoots node_modules/@types scripts/build.ts && node scripts/build.js",
-    "dev": "concurrently \"npm:dev-tsc\" \"npm:dev-watchify\" \"npm:dev-nwjs\"",
+    "dev": "concurrently -s first -k -n tsc,watchify,nwjs -c red,green,blue \"npm:dev-tsc\" \"npm:dev-watchify\" \"npm:dev-nwjs\"",
     "dev-tsc": "tsc -w --strict --typeRoots node_modules/@types -t es2015 -m commonjs --inlineSourceMap --inlineSources src/main.ts",
     "dev-watchify": "watchify -v --debug src/main.js -o bin/app.js",
     "dev-nwjs": "nw bin",
