@@ -1,4 +1,3 @@
-bin/
-ext/nwjs/**
+dist/
 node_modules/
 **/*.js
