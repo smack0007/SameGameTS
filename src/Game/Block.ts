@@ -1,9 +1,9 @@
-import { BlockColors } from './BlockColors';
+import { BlockColors } from "./BlockColors";
 
 export class Block {
     public static readonly WidthInPixels = 32;
     public static readonly HeightInPixels = 32;
-    
+
     public get color(): BlockColors {
         return this._color;
     }
@@ -11,7 +11,7 @@ export class Block {
     public get isSelected(): boolean {
         return this._isSelected;
     }
-    
+
     constructor(
         private _color: BlockColors,
         private _isSelected: boolean = false) {

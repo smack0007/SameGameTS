@@ -1,9 +1,9 @@
-import { Board } from './Game/Board';
-import { BlockColors } from './Game/BlockColors';
-import { Block } from './Game/Block';
+import { Board } from "./Game/Board";
+import { BlockColors } from "./Game/BlockColors";
+import { Block } from "./Game/Block";
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
-canvas.addEventListener('mousedown', onCanvasMouseDown);
+canvas.addEventListener("mousedown", onCanvasMouseDown);
 
 const graphics = canvas.getContext("2d") as CanvasRenderingContext2D;
 
@@ -16,7 +16,7 @@ function init() {
     setInterval(draw, 1000 / 60);
 }
 
-function draw() {    
+function draw() {
     graphics.fillRect(0, 0, canvas.width, canvas.height);
 
     for (let y = 0; y < Board.Height; y++) {
@@ -63,7 +63,7 @@ function draw() {
 
             graphics.putImageData(imageData, xOffset, yOffset);
 
-            if (block.isSelected) {                
+            if (block.isSelected) {
                 graphics.globalAlpha = 0.7;
 
                 graphics.drawImage(

@@ -24,7 +24,7 @@ export class Board {
 
     public onClick(x: number, y: number): void {
         this.unselectAllBlocks();
-        
+
         const blockX = Math.floor(x / Block.WidthInPixels);
         const blockY = Math.floor(y / Block.HeightInPixels);
         const block = this.getBlock(blockX, blockY);
@@ -40,7 +40,7 @@ export class Board {
 
     private selectBlock(startingBlock: Block, x: number, y: number): void {
         const block = this.getBlock(x, y);
-        
+
         if (block.isSelected || block.color !== startingBlock.color) {
             return;
         }
