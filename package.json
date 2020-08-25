@@ -36,12 +36,12 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "build": "npm run build-tsc && npm run build-rollup",
+    "build": "yarn run build-tsc && yarn run build-rollup",
     "build-tsc": "tsc",
     "build-rollup": "rollup -c rollup.config.js",
-    "dev": "npm run build && concurrently -s first -k -n tsc,rollup,nwjs -c blue,red,green \"npm:dev-tsc\" \"npm:dev-rollup\" \"npm:dev-nwjs\"",
-    "dev-tsc": "npm run build-tsc -- --watch",
-    "dev-rollup": "npm run build-rollup -- --watch",
+    "dev": "yarn run build && concurrently -s first -k -n tsc,rollup,nwjs -c blue,red,green \"yarn run dev-tsc\" \"yarn run dev-rollup\" \"yarn run dev-nwjs\"",
+    "dev-tsc": "yarn run build-tsc --watch",
+    "dev-rollup": "yarn run build-rollup --watch",
     "dev-nwjs": "nw dist",
     "lint": "eslint src/**/*.ts",
     "test": "echo 'Test'"
