@@ -2,7 +2,7 @@
     "files.exclude": {
         "**/dist": true,
         "**/node_modules": true,
-        "**/*.js": true,
+        "src/**/*.js": true,
     },
     "files.trimTrailingWhitespace": true,
     "eslint.validate": [ "typescript", "typescriptreact" ]

@@ -6,6 +6,9 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "typeRoots": ["node_modules/@types"]
-  }
+  },
+  "files": [ "src/main.ts" ]
 }
