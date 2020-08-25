@@ -1,7 +1,6 @@
 import { Board } from "./Logic/Board";
-import { BlockColors } from "./Logic/BlockColors";
-import { Block } from "./Logic/Block";
 import { BoardRenderer } from "./Rendering/BoardRenderer";
+import { RNG } from "./Logic/RNG";
 
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
 canvas.addEventListener("mousedown", onCanvasMouseDown);
@@ -10,7 +9,8 @@ const graphics = canvas.getContext("2d") as CanvasRenderingContext2D;
 const blockImage: HTMLImageElement = document.getElementById("blockImage") as HTMLImageElement;
 const boardRenderer: BoardRenderer = new BoardRenderer(graphics, blockImage);
 
-const board = new Board();
+const rng = new RNG(12345);
+const board = new Board(rng);
 
 function init() {
     draw();

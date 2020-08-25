@@ -1,5 +1,6 @@
 import { Block } from "./Block";
 import { BlockColors } from "./BlockColors";
+import { RNG } from "./RNG";
 
 export class Board {
     public static readonly WidthInPixels = 1024;
@@ -11,9 +12,9 @@ export class Board {
 
     private _blocks: Block[] = [];
 
-    constructor() {
+    constructor(private _rng: RNG) {
         for (let i = 0; i < Board.BlockCount; i++) {
-            const blockColor = Math.floor(Math.random() * 4) as BlockColors;
+            const blockColor = this._rng.nextInt(0, 3) as BlockColors;
             this._blocks[i] = new Block(blockColor);
         }
     }
