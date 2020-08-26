@@ -1,3 +1,4 @@
+import { AssetLoader } from "./Assets/AssetLoader";
 import { Board } from "./Logic/Board";
 import { BoardRenderer } from "./Rendering/BoardRenderer";
 import { RNG } from "./Logic/RNG";
@@ -5,12 +6,16 @@ import { RNG } from "./Logic/RNG";
 const canvas: HTMLCanvasElement = document.getElementById("canvas") as HTMLCanvasElement;
 canvas.addEventListener("mousedown", onCanvasMouseDown);
 
-const graphics = canvas.getContext("2d") as CanvasRenderingContext2D;
-const blockImage: HTMLImageElement = document.getElementById("blockImage") as HTMLImageElement;
-const boardRenderer: BoardRenderer = new BoardRenderer(graphics, blockImage);
-
 const rng = new RNG(12345);
 const board = new Board(rng);
+
+const graphics = canvas.getContext("2d") as CanvasRenderingContext2D;
+let boardRenderer: BoardRenderer;
+
+AssetLoader.loadImages("assets/block.png").then(images => {
+    boardRenderer = new BoardRenderer(graphics, images[0]);
+    init();
+});
 
 function init() {
     draw();
@@ -29,5 +34,3 @@ function onCanvasMouseDown(event: MouseEvent) {
         board.onClick(event.x, event.y);
     }
 }
-
-init();
