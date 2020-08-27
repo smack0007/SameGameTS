@@ -6,9 +6,11 @@ import { RNG } from "./Logic/RNG";
 const canvas: HTMLCanvasElement = document.getElementById(
     "canvas"
 ) as HTMLCanvasElement;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 canvas.addEventListener("mousedown", onCanvasMouseDown);
 
-const rng = new RNG(12345);
+const rng = new RNG(1234);
 const board = new Board(rng);
 
 const graphics = canvas.getContext("2d") as CanvasRenderingContext2D;
