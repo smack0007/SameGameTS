@@ -2,23 +2,26 @@
 <html>
     <head>
         <title>SameGameTS</title>
-        <style>html, body { margin: 0; height: 100%; }</style>
+        <style>
+            html,
+            body {
+                margin: 0;
+                height: 100%;
+            }
+        </style>
     </head>
     <body>
         <canvas id="canvas" width="1024" height="768"></canvas>
-        <div style="display: none;">
-            <img id="blockImage" src="assets/block.png" width="160" height="32" />
-        </div>
         <script src="app.js"></script>
         <script>
             var win = nw.Window.get();
             win.showDevTools();
-            
-            var path = './';
-            var fs = require('fs');
-            
-            var reloadWatcher = fs.watch(path, function() {
-                console.info('Reloading...');
+
+            var path = "./";
+            var fs = require("fs");
+
+            var reloadWatcher = fs.watch(path, function () {
+                console.info("Reloading...");
                 location.reload();
                 reloadWatcher.close();
             });

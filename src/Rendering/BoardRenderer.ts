@@ -5,8 +5,8 @@ import { BlockColors } from "../Logic/BlockColors";
 export class BoardRenderer {
     constructor(
         private _graphics: CanvasRenderingContext2D,
-        private _blockImage: HTMLImageElement) {
-    }
+        private _blockImage: HTMLImageElement
+    ) {}
 
     public render(board: Board): void {
         for (let y = 0; y < Board.Height; y++) {
@@ -24,9 +24,15 @@ export class BoardRenderer {
                     xOffset,
                     yOffset,
                     Block.WidthInPixels,
-                    Block.HeightInPixels);
+                    Block.HeightInPixels
+                );
 
-                const imageData = this._graphics.getImageData(xOffset, yOffset, Block.WidthInPixels, Block.HeightInPixels);
+                const imageData = this._graphics.getImageData(
+                    xOffset,
+                    yOffset,
+                    Block.WidthInPixels,
+                    Block.HeightInPixels
+                );
 
                 for (let i = 0; i < imageData.data.length; i += 4) {
                     switch (block.color) {
@@ -65,9 +71,10 @@ export class BoardRenderer {
                         xOffset,
                         yOffset,
                         Block.WidthInPixels,
-                        Block.HeightInPixels);
+                        Block.HeightInPixels
+                    );
 
-                        this._graphics.globalAlpha = 1.0;
+                    this._graphics.globalAlpha = 1.0;
                 }
             }
         }

@@ -14,8 +14,8 @@ export class Block {
 
     constructor(
         private _color: BlockColors,
-        private _isSelected: boolean = false) {
-    }
+        private _isSelected: boolean = false
+    ) {}
 
     public select(): void {
         this._isSelected = true;

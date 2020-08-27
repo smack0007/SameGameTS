@@ -14,7 +14,7 @@ export class RNG {
         const hi = this._seed / RNG.q;
         const lo = this._seed % RNG.q;
 
-        this._seed = (RNG.a * lo) - (RNG.r * hi);
+        this._seed = RNG.a * lo - RNG.r * hi;
 
         if (this._seed <= 0) {
             this._seed = this._seed + RNG.m;

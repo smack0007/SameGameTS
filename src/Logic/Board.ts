@@ -4,7 +4,7 @@ import { RNG } from "./RNG";
 
 export class Board {
     public static readonly WidthInPixels = 1024;
-    public static readonly HeightInPixels = 768 - (Block.HeightInPixels * 2);
+    public static readonly HeightInPixels = 768 - Block.HeightInPixels * 2;
 
     public static readonly Width = Board.WidthInPixels / Block.WidthInPixels;
     public static readonly Height = Board.HeightInPixels / Block.HeightInPixels;
