@@ -4,11 +4,10 @@ import { BlockColors } from "../Logic/BlockColors";
 
 export class BoardRenderer {
     constructor(
-        private _graphics: CanvasRenderingContext2D,
-        private _blockImage: HTMLImageElement
-    ) {}
+        private _graphics: CanvasRenderingContext2D
+    ) { }
 
-    public render(board: Board): void {
+    public render(board: Board, blockImage: HTMLImageElement): void {
         for (let y = 0; y < Board.Height; y++) {
             for (let x = 0; x < Board.Width; x++) {
                 const block = board.getBlock(x, y);
@@ -16,7 +15,7 @@ export class BoardRenderer {
                 const yOffset = y * Block.HeightInPixels;
 
                 this._graphics.drawImage(
-                    this._blockImage,
+                    blockImage,
                     0,
                     0,
                     Block.WidthInPixels,
@@ -63,7 +62,7 @@ export class BoardRenderer {
                     this._graphics.globalAlpha = 0.7;
 
                     this._graphics.drawImage(
-                        this._blockImage,
+                        blockImage,
                         Block.WidthInPixels * 4,
                         0,
                         Block.WidthInPixels,
