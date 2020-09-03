@@ -33,6 +33,33 @@ export class Board {
         this.selectBlock(block, blockX, blockY);
     }
 
+    public onDoubleClick(): void {
+        const selected = this._blocks.filter(block => block.isSelected);
+        if (selected.length <= 1) {
+            return;
+        }
+
+        for (const block of selected) {
+            block.deactivate();
+        }
+    }
+
+    public update(elapsed: number): void {
+        for (let y = 0; y < Board.Height; y++) {
+            for (let x = 0; x < Board.Width; x++) {
+                const block = this.getBlock(x, y);
+                block.update(elapsed);
+
+                if (y < Board.Height - 1) {
+                    const blockBelow = this.getBlock(x, y + 1);
+                    if (!blockBelow.isActive) {
+                        block.fallDown(blockBelow);
+                    }
+                }
+            }
+        }
+    }
+
     private unselectAllBlocks(): void {
         for (const block of this._blocks) {
             block.unselect();
@@ -42,7 +69,7 @@ export class Board {
     private selectBlock(startingBlock: Block, x: number, y: number): void {
         const block = this.getBlock(x, y);
 
-        if (block.isSelected || block.color !== startingBlock.color) {
+        if (!block.isActive || block.isSelected || block.color !== startingBlock.color) {
             return;
         }
 

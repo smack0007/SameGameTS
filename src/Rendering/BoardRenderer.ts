@@ -11,8 +11,13 @@ export class BoardRenderer {
         for (let y = 0; y < Board.Height; y++) {
             for (let x = 0; x < Board.Width; x++) {
                 const block = board.getBlock(x, y);
+
+                if (!block.isActive) {
+                    continue;
+                }
+
                 const xOffset = x * Block.WidthInPixels;
-                const yOffset = y * Block.HeightInPixels;
+                const yOffset = y * Block.HeightInPixels + block.offsetY;
 
                 this._graphics.drawImage(
                     blockImage,

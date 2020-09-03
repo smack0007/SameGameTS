@@ -11,6 +11,8 @@ export class Game {
 
     private _blockImage: HTMLImageElement | undefined;
 
+    private _lastTime: number = 0;
+
     constructor(
         private _canvas: HTMLCanvasElement
     ) {
@@ -33,7 +35,8 @@ export class Game {
 
     private init(): void {
         this.draw();
-        setInterval(() => this.draw(), 1000 / 60);
+
+        requestAnimationFrame(time => this.tick(time));
     }
 
     private onClick(event: MouseEvent) {
@@ -54,8 +57,25 @@ export class Game {
             event.y > 0 &&
             event.y < Board.HeightInPixels
         ) {
-            console.info("onDoubleClick", event);
+            this._board.onDoubleClick();
         }
+    }
+
+    private tick(time: number): void {
+        if (this._lastTime > 0) {
+            const elapsed = (time - this._lastTime) / 1000.0;
+            console.info(elapsed);
+            this.update(elapsed);
+            this.draw();
+        }
+
+        this._lastTime = time;
+
+        requestAnimationFrame(elapsed => this.tick(elapsed));
+    }
+
+    private update(elapsed: number): void {
+        this._board.update(elapsed);
     }
 
     private draw(): void {
