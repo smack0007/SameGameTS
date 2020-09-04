@@ -1,11 +1,10 @@
+import { FrameBuffer } from "../FrameBuffer";
 import { Board } from "../Logic/Board";
 import { Block } from "../Logic/Block";
 import { BlockColors } from "../Logic/BlockColors";
 
 export class BoardRenderer {
-    constructor(
-        private _graphics: CanvasRenderingContext2D
-    ) { }
+    constructor(private _frameBuffer: FrameBuffer) {}
 
     public render(board: Board, blockImage: HTMLImageElement): void {
         for (let y = 0; y < Board.Height; y++) {
@@ -19,7 +18,7 @@ export class BoardRenderer {
                 const xOffset = x * Block.WidthInPixels;
                 const yOffset = y * Block.HeightInPixels + block.offsetY;
 
-                this._graphics.drawImage(
+                this._frameBuffer.context.drawImage(
                     blockImage,
                     0,
                     0,
@@ -31,7 +30,7 @@ export class BoardRenderer {
                     Block.HeightInPixels
                 );
 
-                const imageData = this._graphics.getImageData(
+                const imageData = this._frameBuffer.context.getImageData(
                     xOffset,
                     yOffset,
                     Block.WidthInPixels,
@@ -61,12 +60,16 @@ export class BoardRenderer {
                     }
                 }
 
-                this._graphics.putImageData(imageData, xOffset, yOffset);
+                this._frameBuffer.context.putImageData(
+                    imageData,
+                    xOffset,
+                    yOffset
+                );
 
                 if (block.isSelected) {
-                    this._graphics.globalAlpha = 0.7;
+                    this._frameBuffer.context.globalAlpha = 0.7;
 
-                    this._graphics.drawImage(
+                    this._frameBuffer.context.drawImage(
                         blockImage,
                         Block.WidthInPixels * 4,
                         0,
@@ -78,7 +81,7 @@ export class BoardRenderer {
                         Block.HeightInPixels
                     );
 
-                    this._graphics.globalAlpha = 1.0;
+                    this._frameBuffer.context.globalAlpha = 1.0;
                 }
             }
         }

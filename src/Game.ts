@@ -1,10 +1,10 @@
+import { FrameBuffer } from "./FrameBuffer";
 import { AssetLoader } from "./Assets/AssetLoader";
 import { Board } from "./Logic/Board";
 import { RNG } from "./Logic/RNG";
 import { BoardRenderer } from "./Rendering/BoardRenderer";
 
 export class Game {
-    private _graphics: CanvasRenderingContext2D;
     private _boardRenderer: BoardRenderer;
 
     private _board: Board;
@@ -13,21 +13,23 @@ export class Game {
 
     private _lastTime: number = 0;
 
-    constructor(
-        private _canvas: HTMLCanvasElement
-    ) {
-        this._graphics = this._canvas.getContext("2d") as CanvasRenderingContext2D;
-        this._boardRenderer = new BoardRenderer(this._graphics);
+    constructor(private _frameBuffer: FrameBuffer) {
+        this._boardRenderer = new BoardRenderer(this._frameBuffer);
 
         const rng = new RNG(12345);
         this._board = new Board(rng);
 
-        this._canvas.addEventListener("mousedown", ev => this.onClick(ev));
-        this._canvas.addEventListener("dblclick", ev => this.onDoubleClick(ev));
+        this._frameBuffer.addEventListener("mousedown", (ev) =>
+            this.onClick(ev as MouseEvent)
+        );
+
+        this._frameBuffer.addEventListener("dblclick", (ev) =>
+            this.onDoubleClick(ev as MouseEvent)
+        );
     }
 
     public run(): void {
-        AssetLoader.loadImages("assets/block.png").then(images => {
+        AssetLoader.loadImages("assets/block.png").then((images) => {
             this._blockImage = images[0];
             this.init();
         });
@@ -36,7 +38,7 @@ export class Game {
     private init(): void {
         this.draw();
 
-        requestAnimationFrame(time => this.tick(time));
+        requestAnimationFrame((time) => this.tick(time));
     }
 
     private onClick(event: MouseEvent) {
@@ -64,14 +66,13 @@ export class Game {
     private tick(time: number): void {
         if (this._lastTime > 0) {
             const elapsed = (time - this._lastTime) / 1000.0;
-            console.info(elapsed);
             this.update(elapsed);
             this.draw();
         }
 
         this._lastTime = time;
 
-        requestAnimationFrame(elapsed => this.tick(elapsed));
+        requestAnimationFrame((elapsed) => this.tick(elapsed));
     }
 
     private update(elapsed: number): void {
@@ -79,8 +80,18 @@ export class Game {
     }
 
     private draw(): void {
-        this._graphics.fillRect(0, 0, this._graphics.canvas.width, this._graphics.canvas.height);
+        this._frameBuffer.context.fillRect(
+            0,
+            0,
+            this._frameBuffer.width,
+            this._frameBuffer.height
+        );
 
-        this._boardRenderer.render(this._board, this._blockImage as HTMLImageElement);
+        this._boardRenderer.render(
+            this._board,
+            this._blockImage as HTMLImageElement
+        );
+
+        this._frameBuffer.present();
     }
 }

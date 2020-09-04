@@ -8,10 +8,16 @@
                 margin: 0;
                 height: 100%;
             }
+
+            #app canvas {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
         </style>
     </head>
     <body>
-        <canvas id="canvas"></canvas>
+        <div id="app"></div>
         <script>
             var win = nw.Window.get();
             win.showDevTools();

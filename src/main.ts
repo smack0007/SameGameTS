@@ -1,10 +1,20 @@
+import { FrameBuffer } from "./FrameBuffer";
 import { Game } from "./Game";
 
-const canvas: HTMLCanvasElement = document.getElementById(
-    "canvas"
-) as HTMLCanvasElement;
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const appElement: HTMLElement = document.getElementById("app") as HTMLElement;
 
-const game = new Game(canvas);
+const frontBuffer: HTMLCanvasElement = document.createElement("canvas");
+appElement.appendChild(frontBuffer);
+
+const backBuffer: HTMLCanvasElement = document.createElement("canvas");
+appElement.appendChild(backBuffer);
+
+const frameBuffer: FrameBuffer = new FrameBuffer(
+    frontBuffer,
+    backBuffer,
+    window.innerWidth,
+    window.innerHeight
+);
+
+const game = new Game(frameBuffer);
 game.run();
