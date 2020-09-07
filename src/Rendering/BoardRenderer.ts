@@ -58,8 +58,6 @@ export class BoardRenderer {
                 this._frameBuffer.context.putImageData(imageData, xOffset, yOffset);
 
                 if (block.isSelected) {
-                    this._frameBuffer.context.globalAlpha = 0.7;
-
                     this._frameBuffer.context.drawImage(
                         blockImage,
                         Block.WidthInPixels * 4,
@@ -71,8 +69,6 @@ export class BoardRenderer {
                         Block.WidthInPixels,
                         Block.HeightInPixels
                     );
-
-                    this._frameBuffer.context.globalAlpha = 1.0;
                 }
             }
         }
