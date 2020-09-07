@@ -1,53 +1,38 @@
 export class FrameBuffer {
-    private _currentOffset = 0;
-    private _canvases: HTMLCanvasElement[] = [];
-    private _renderingContexts: CanvasRenderingContext2D[] = [];
+    private _frontBufferContext: CanvasRenderingContext2D;
+
+    private _backBuffer: HTMLCanvasElement;
+    private _backBufferContext: CanvasRenderingContext2D;
 
     public get context(): CanvasRenderingContext2D {
-        return this._renderingContexts[this._currentOffset];
+        return this._backBufferContext;
     }
 
-    constructor(
-        frontBuffer: HTMLCanvasElement,
-        backBuffer: HTMLCanvasElement,
-        public readonly width: number,
-        public readonly height: number
-    ) {
-        this._canvases.push(frontBuffer, backBuffer);
+    public get width(): number {
+        return this._frontBuffer.width;
+    }
 
-        this._renderingContexts.push(
-            frontBuffer.getContext("2d") as CanvasRenderingContext2D,
-            backBuffer.getContext("2d") as CanvasRenderingContext2D
-        );
+    public get height(): number {
+        return this._frontBuffer.height;
+    }
 
-        for (const canvas of this._canvases) {
-            canvas.width = this.width;
-            canvas.height = this.height;
-        }
+    constructor(private _frontBuffer: HTMLCanvasElement) {
+        this._frontBufferContext = this._frontBuffer.getContext("2d") as CanvasRenderingContext2D;
 
-        this._renderingContexts[0].fillRect(0, 0, this.width, this.height);
+        this._backBuffer = document.createElement("canvas") as HTMLCanvasElement;
+        this._backBuffer.width = this._frontBuffer.width;
+        this._backBuffer.height = this._frontBuffer.height;
+        this._backBufferContext = this._backBuffer.getContext("2d") as CanvasRenderingContext2D;
+
+        this._backBufferContext.fillRect(0, 0, this.width, this.height);
         this.present();
     }
 
     public addEventListener(type: string, listener: EventListener): void {
-        for (const canvas of this._canvases) {
-            canvas.addEventListener(type, listener);
-        }
+        this._frontBuffer.addEventListener(type, listener);
     }
 
     public present(): void {
-        for (let i = 0; i < this._canvases.length; i++) {
-            if (i === this._currentOffset) {
-                this._canvases[this._currentOffset].style.visibility = "visible";
-            } else {
-                this._canvases[this._currentOffset].style.visibility = "hidden";
-            }
-        }
-
-        this._currentOffset++;
-
-        if (this._currentOffset >= this._canvases.length) {
-            this._currentOffset = 0;
-        }
+        this._frontBufferContext.drawImage(this._backBuffer, 0, 0);
     }
 }

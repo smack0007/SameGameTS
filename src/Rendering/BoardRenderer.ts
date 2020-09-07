@@ -15,8 +15,8 @@ export class BoardRenderer {
                     continue;
                 }
 
-                const xOffset = x * Block.WidthInPixels;
-                const yOffset = y * Block.HeightInPixels + block.offsetY;
+                const xOffset = Math.trunc(x * Block.WidthInPixels);
+                const yOffset = Math.trunc(y * Block.HeightInPixels + block.offsetY);
 
                 this._frameBuffer.context.drawImage(
                     blockImage,
@@ -30,12 +30,7 @@ export class BoardRenderer {
                     Block.HeightInPixels
                 );
 
-                const imageData = this._frameBuffer.context.getImageData(
-                    xOffset,
-                    yOffset,
-                    Block.WidthInPixels,
-                    Block.HeightInPixels
-                );
+                const imageData = this._frameBuffer.context.getImageData(xOffset, yOffset, Block.WidthInPixels, Block.HeightInPixels);
 
                 for (let i = 0; i < imageData.data.length; i += 4) {
                     switch (block.color) {
@@ -60,11 +55,7 @@ export class BoardRenderer {
                     }
                 }
 
-                this._frameBuffer.context.putImageData(
-                    imageData,
-                    xOffset,
-                    yOffset
-                );
+                this._frameBuffer.context.putImageData(imageData, xOffset, yOffset);
 
                 if (block.isSelected) {
                     this._frameBuffer.context.globalAlpha = 0.7;
