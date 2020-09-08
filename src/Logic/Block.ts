@@ -4,7 +4,7 @@ export class Block {
     public static readonly WidthInPixels: number = 32;
     public static readonly HeightInPixels: number = 32;
 
-    public static readonly FallRate: number = Block.HeightInPixels * 10;
+    public static readonly FallRate: number = Block.HeightInPixels * 20;
 
     private _isActive: boolean = true;
     private _offsetY: number = 0;
@@ -25,10 +25,7 @@ export class Block {
         return this._offsetY;
     }
 
-    constructor(
-        private _color: BlockColors,
-        private _isSelected: boolean = false
-    ) { }
+    constructor(private _color: BlockColors, private _isSelected: boolean = false) {}
 
     public select(): void {
         this._isSelected = true;

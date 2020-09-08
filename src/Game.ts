@@ -9,7 +9,7 @@ export class Game {
 
     private _board: Board;
 
-    private _blockImage: HTMLImageElement | undefined;
+    private _blockImage: HTMLCanvasElement | undefined;
 
     private _lastTime: number = 0;
 
@@ -19,18 +19,15 @@ export class Game {
         const rng = new RNG(12345);
         this._board = new Board(rng);
 
-        this._frameBuffer.addEventListener("mousedown", (ev) =>
-            this.onClick(ev as MouseEvent)
-        );
+        this._frameBuffer.addEventListener("mousedown", (ev) => this.onClick(ev as MouseEvent));
 
-        this._frameBuffer.addEventListener("dblclick", (ev) =>
-            this.onDoubleClick(ev as MouseEvent)
-        );
+        this._frameBuffer.addEventListener("dblclick", (ev) => this.onDoubleClick(ev as MouseEvent));
     }
 
     public run(): void {
         AssetLoader.loadImages("assets/block.png").then((images) => {
-            this._blockImage = images[0];
+            this._blockImage = this._boardRenderer.createBlockCanvas(images[0]);
+
             this.init();
         });
     }
@@ -42,23 +39,13 @@ export class Game {
     }
 
     private onClick(event: MouseEvent) {
-        if (
-            event.x > 0 &&
-            event.x < Board.WidthInPixels &&
-            event.y > 0 &&
-            event.y < Board.HeightInPixels
-        ) {
+        if (event.x > 0 && event.x < Board.WidthInPixels && event.y > 0 && event.y < Board.HeightInPixels) {
             this._board.onClick(event.x, event.y);
         }
     }
 
     private onDoubleClick(event: MouseEvent) {
-        if (
-            event.x > 0 &&
-            event.x < Board.WidthInPixels &&
-            event.y > 0 &&
-            event.y < Board.HeightInPixels
-        ) {
+        if (event.x > 0 && event.x < Board.WidthInPixels && event.y > 0 && event.y < Board.HeightInPixels) {
             this._board.onDoubleClick();
         }
     }
@@ -80,17 +67,9 @@ export class Game {
     }
 
     private draw(): void {
-        this._frameBuffer.context.fillRect(
-            0,
-            0,
-            this._frameBuffer.width,
-            this._frameBuffer.height
-        );
+        this._frameBuffer.context.fillRect(0, 0, this._frameBuffer.width, this._frameBuffer.height);
 
-        this._boardRenderer.render(
-            this._board,
-            this._blockImage as HTMLImageElement
-        );
+        this._boardRenderer.render(this._board, this._blockImage as HTMLCanvasElement);
 
         this._frameBuffer.present();
     }

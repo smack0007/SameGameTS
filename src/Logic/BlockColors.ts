@@ -4,3 +4,7 @@ export enum BlockColors {
     green,
     yellow,
 }
+
+export const BlockColorKeys: number[] = Object.keys(BlockColors)
+    .map((x) => Number(x))
+    .filter((x) => !isNaN(x));
