@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/smack0007/SameGameTS#readme",
   "dependencies": {
-    "nw": "^0.47.3"
+    "nw": "^0.48.1"
   },
   "devDependencies": {
     "@types/node": "^14.6.0",
