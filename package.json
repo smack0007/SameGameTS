@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/smack0007/SameGameTS#readme",
   "dependencies": {
-    "nw": "^0.48.1"
+    "nw": "^0.51.0"
   },
   "devDependencies": {
     "@types/node": "^14.6.0",
@@ -36,14 +36,15 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "build": "yarn run build-tsc && yarn run build-rollup",
+    "build": "npm run build-tsc && npm run build-rollup",
     "build-tsc": "tsc",
     "build-rollup": "rollup -c rollup.config.js",
-    "dev": "yarn run build && concurrently -s first -k -n tsc,rollup,nwjs -c blue,red,green \"yarn run dev-tsc\" \"yarn run dev-rollup\" \"yarn run dev-nwjs\"",
-    "dev-tsc": "yarn run build-tsc --watch",
-    "dev-rollup": "yarn run build-rollup --watch",
+    "dev": "npm run build && concurrently -s first -k -n tsc,rollup,nwjs -c blue,red,green \"npm run dev-tsc\" \"npm run dev-rollup\" \"npm run dev-nwjs\"",
+    "dev-tsc": "npm run build-tsc --watch",
+    "dev-rollup": "npm run build-rollup --watch",
     "dev-nwjs": "nw dist",
     "lint": "eslint src/**/*.ts",
+    "start": "npm run build && nw dist",
     "test": "echo 'Test'"
   }
 }

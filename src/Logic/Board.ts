@@ -12,6 +12,10 @@ export class Board {
 
     private _blocks: Block[] = [];
 
+    public get selectedBlockCount(): number {
+        return this._blocks.filter(x => x.isSelected).length;
+    }
+
     constructor(private _rng: RNG) {
         for (let i = 0; i < Board.BlockCount; i++) {
             const blockColor = this._rng.nextInt(0, 3) as BlockColors;

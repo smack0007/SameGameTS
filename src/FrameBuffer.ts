@@ -16,6 +16,10 @@ export class FrameBuffer {
         return this._frontBuffer.height;
     }
 
+    public get element(): HTMLCanvasElement {
+        return this._frontBuffer;
+    }
+
     constructor(private _frontBuffer: HTMLCanvasElement) {
         this._frontBufferContext = this._frontBuffer.getContext("2d") as CanvasRenderingContext2D;
 
