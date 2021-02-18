@@ -27,6 +27,21 @@ export const copyDir = async function (src: string, dest: string): Promise<void>
     }
 };
 
+export const listFiles = async function (path: string): Promise<string[]> {
+    const files = [];
+    for (const file of readdirSync(path)) {
+        const filePath = join(path, file);
+        const fileStat = lstatSync(filePath);
+        if (fileStat.isDirectory()) {
+            files.push(...(await listFiles(filePath)));
+        } else {
+            files.push(filePath);
+        }
+    }
+
+    return files;
+};
+
 const mkdirPromise = promisify(mkdirOriginal);
 export const mkdir = function (dir: PathLike): Promise<void> {
     console.info(`Create directory ${dir}`);
