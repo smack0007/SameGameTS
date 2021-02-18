@@ -1,7 +1,7 @@
-import { FrameBuffer } from "../FrameBuffer";
-import { Board } from "../Logic/Board";
-import { Block } from "../Logic/Block";
-import { BlockColors, BlockColorKeys } from "../Logic/BlockColors";
+import { FrameBuffer } from "../FrameBuffer.js";
+import { Board } from "../Logic/Board.js";
+import { Block } from "../Logic/Block.js";
+import { BlockColors, BlockColorKeys } from "../Logic/BlockColors.js";
 
 export class BoardRenderer {
     constructor(private _frameBuffer: FrameBuffer) {}

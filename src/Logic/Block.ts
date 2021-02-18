@@ -1,4 +1,4 @@
-import { BlockColors } from "./BlockColors";
+import { BlockColors } from "./BlockColors.js";
 
 export class Block {
     public static readonly WidthInPixels: number = 32;

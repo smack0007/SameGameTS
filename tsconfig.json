@@ -2,13 +2,18 @@
   "compilerOptions": {
     "target": "ES2015",
     "module": "es6",
+    "outDir": "dist",
     "moduleResolution": "node",
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "inlineSourceMap": true,
     "inlineSources": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
-  "files": [ "src/main.ts" ]
+  "include": [
+    "src/**/*.ts"
+  ]
 }

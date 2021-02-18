@@ -1,5 +1,5 @@
-import { FrameBuffer } from "./FrameBuffer";
-import { Game } from "./Game";
+import { FrameBuffer } from "./FrameBuffer.js";
+import { Game } from "./Game.js";
 
 const appElement: HTMLElement = document.getElementById("app") as HTMLElement;
 

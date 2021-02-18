@@ -1,8 +1,8 @@
-import { FrameBuffer } from "./FrameBuffer";
-import { AssetLoader } from "./Assets/AssetLoader";
-import { Board } from "./Logic/Board";
-import { RNG } from "./Logic/RNG";
-import { BoardRenderer } from "./Rendering/BoardRenderer";
+import { FrameBuffer } from "./FrameBuffer.js";
+import { AssetLoader } from "./Assets/AssetLoader.js";
+import { Board } from "./Logic/Board.js";
+import { RNG } from "./Logic/RNG.js";
+import { BoardRenderer } from "./Rendering/BoardRenderer.js";
 
 export class Game {
     private _boardRenderer: BoardRenderer;
@@ -39,7 +39,7 @@ export class Game {
         this._textOverlayElement.style.left = "0";
         this._textOverlayElement.style.top = Board.HeightInPixels + "px";
         this._textOverlayElement.style.width = Board.WidthInPixels + "px";
-        this._textOverlayElement.style.height = (this._frameBuffer.height -  Board.HeightInPixels) + "px";
+        this._textOverlayElement.style.height = this._frameBuffer.height - Board.HeightInPixels + "px";
         this._frameBuffer.element.parentElement?.appendChild(this._textOverlayElement);
 
         this._scoreElement = document.createElement("div");

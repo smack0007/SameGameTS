@@ -1,6 +1,6 @@
-import { Block } from "./Block";
-import { BlockColors } from "./BlockColors";
-import { RNG } from "./RNG";
+import { Block } from "./Block.js";
+import { BlockColors } from "./BlockColors.js";
+import { RNG } from "./RNG.js";
 
 export class Board {
     public static readonly WidthInPixels = 1024;
@@ -13,7 +13,7 @@ export class Board {
     private _blocks: Block[] = [];
 
     public get selectedBlockCount(): number {
-        return this._blocks.filter(x => x.isSelected).length;
+        return this._blocks.filter((x) => x.isSelected).length;
     }
 
     constructor(private _rng: RNG) {
@@ -38,7 +38,7 @@ export class Board {
     }
 
     public onDoubleClick(): void {
-        const selected = this._blocks.filter(block => block.isSelected);
+        const selected = this._blocks.filter((block) => block.isSelected);
         if (selected.length <= 1) {
             return;
         }
