@@ -32,7 +32,7 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p ./build && node ./build/build.js",
     "lint": "eslint src/**/*.ts",
     "start": "npm run build && nw dist",
     "test": "echo 'Test'"
