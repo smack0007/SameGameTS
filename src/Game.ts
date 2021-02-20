@@ -75,6 +75,7 @@ export class Game {
     private onDoubleClick(event: MouseEvent) {
         if (event.x > 0 && event.x < Board.WidthInPixels && event.y > 0 && event.y < Board.HeightInPixels) {
             this._board.onDoubleClick();
+            this.updateTextOverlay();
         }
     }
 
@@ -103,7 +104,7 @@ export class Game {
     }
 
     private updateTextOverlay(): void {
-        this._scoreElement.innerText = "Score: 0";
+        this._scoreElement.innerText = "Score: " + this._board.score;
         this._selectedElement.innerText = "Selected: " + this._board.selectedBlockCount;
     }
 }

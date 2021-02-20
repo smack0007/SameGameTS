@@ -11,9 +11,14 @@ export class Board {
     public static readonly BlockCount = Board.Width * Board.Height;
 
     private _blocks: Block[] = [];
+    private _score: number = 0;
 
     public get selectedBlockCount(): number {
         return this._blocks.filter((x) => x.isSelected).length;
+    }
+
+    public get score(): number {
+        return this._score;
     }
 
     constructor(private _rng: RNG) {
@@ -43,9 +48,13 @@ export class Board {
             return;
         }
 
+        let scoreForSelectedBlocks = 0;
         for (const block of selected) {
             block.deactivate();
+            scoreForSelectedBlocks += 1;
         }
+
+        this._score += scoreForSelectedBlocks;
     }
 
     public update(elapsed: number): void {
